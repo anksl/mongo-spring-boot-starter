@@ -18,9 +18,11 @@ public class Request {
     @Id
     private ObjectId id;
 
-    String url;
+    private String url;
 
-    String user;
+    private String user;
 
-    String contentType;
+    private String body;
+
+    private String contentType;
 }

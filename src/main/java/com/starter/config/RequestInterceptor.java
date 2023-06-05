@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class RequestInterceptor implements HandlerInterceptor {
         Request newRequest = new Request();
         newRequest.setUrl(String.valueOf(cachedBodyHttpServletRequest.getRequestURL()));
         newRequest.setUser(cachedBodyHttpServletRequest.getRemoteUser());
+        newRequest.setBody(cachedBodyHttpServletRequest.getReader().lines().collect(Collectors.joining(System.lineSeparator())));
         newRequest.setContentType(cachedBodyHttpServletRequest.getContentType());
         requestRepository.save(newRequest);
     }
